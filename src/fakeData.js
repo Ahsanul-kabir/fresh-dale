@@ -1,0 +1,22 @@
+export const data = [
+    {
+        name:"photato",
+        Image:"../images/cleanWater.png",
+        price:"50",
+    },
+    {
+        name:"photato",
+        Image:"../images/cleanWater.png",
+        price:"50",
+    },
+    {
+        name:"photato",
+        Image:"../images/cleanWater.png",
+        price:"50",
+    },
+    {
+        name:"photato",
+        Image:"../images/cleanWater.png",
+        price:"50",
+    }
+]
