@@ -9,7 +9,8 @@ const Admin = () => {
     const onSubmit = data => {
         const eventData = {
             name: data.example,
-            imageURL: imageURL
+            imageURL: imageURL,
+            price: data.price,
         };
         const url = `http://localhost:5000/addEvents`;
         console.log(eventData)
@@ -48,6 +49,9 @@ const Admin = () => {
                 <p>Name: <input name="name" defaultValue="New exciting event" {...register("example")} /></p>
                 <br></br>
                 <p>Product Image: <input type="file" onChange={handleImageUpload} /></p>
+                <br></br>
+                <br></br>
+                <p>Price: <input name="price" defaultValue="New exciting event" {...register("price")} /></p>
                 <br></br>
                 <input type="submit" />
             </form>
