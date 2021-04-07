@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 
 import Grid from '@material-ui/core/Grid';
@@ -11,9 +11,17 @@ import { Button } from '@material-ui/core';
 import { useParams } from 'react-router';
 
 
-const Checkout = ({ list }) => {
-    // console.log(list)
+const Checkout = () => {
+    const [events, setEvents] = useState([]);
+    useEffect(() => {
+
+        fetch('http://localhost:5000/events')
+            .then(res => res.json())
+            .then(data => setEvents(data))
+    }, [])
+
     const { id } = useParams();
+
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const [selectedDate, setSelectedDate] = useState({
@@ -32,6 +40,13 @@ const Checkout = ({ list }) => {
         newDate.checkOut = date;
         setSelectedDate(newDate);
     };
+    const [currentProduct, setCurrentProduct] = useState({})
+    useEffect(() => {
+        let Product = events.filter(prod => prod._id === id);
+        setCurrentProduct(Product[0])
+    }, [events])
+
+
 
     const handleCheckout = () => {
         const newOrders = { ...loggedInUser, ...selectedDate };
@@ -49,6 +64,8 @@ const Checkout = ({ list }) => {
         <div>
             <h1>hi {loggedInUser.name} checkout</h1>
             <h1>ID : {id}</h1>
+            <h1>Name:{currentProduct?.name}</h1>
+            <h1>price:{currentProduct?.price}</h1>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
                     <KeyboardDatePicker
