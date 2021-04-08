@@ -61,42 +61,49 @@ const Checkout = () => {
             });
     }
     return (
-        <div>
-            <h1>hi {loggedInUser.name} checkout</h1>
-            <h1>ID : {id}</h1>
-            <h1>Name:{currentProduct?.name}</h1>
-            <h1>price:{currentProduct?.price}</h1>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="space-around">
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="CheckIn Date"
-                        value={selectedDate.checkIn}
-                        onChange={handleCheckInDate}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                    <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="CheckOut Date"
-                        format="dd/MM/yyyy"
-                        value={selectedDate.checkOut}
-                        onChange={handleCheckOutDate}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                </Grid>
-                <Button onClick={handleCheckout} variant="contained" color="primary">Checkout</Button>
-            </MuiPickersUtilsProvider>
+        <div style={{backgroundColor:'lightcyan'}}>
+            {/* <h1>hi {loggedInUser.name} checkout</h1> */}
+            {/* <h1>ID : {id}</h1> */}
+            <div style={{ margin:"5% 10%" }}>
+                <h1 style={{color:'orange'}}>Name:{currentProduct?.name}</h1>
+                <br />
+                <h1 style={{color:'orange'}}>Price:{currentProduct?.price}</h1>
+            </div>
+            <h3 style={{margin:"3% 10%"}}>Select Parched Date and Select Delivery Date</h3>
+            <div className='row'>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Parched Date"
+                            value={selectedDate.checkIn}
+                            onChange={handleCheckInDate}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                        <KeyboardDatePicker
+                            margin="normal"
+                            id="date-picker-dialog"
+                            label="Take Delivery Date"
+                            format="dd/MM/yyyy"
+                            value={selectedDate.checkOut}
+                            onChange={handleCheckOutDate}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </Grid>
+                    <Button style={{ margin: "10px auto" }} onClick={handleCheckout} variant="contained" color="primary">Checkout</Button>
+                </MuiPickersUtilsProvider>
 
+            </div>
         </div>
+
     );
 };
 

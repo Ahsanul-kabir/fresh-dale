@@ -34,10 +34,27 @@ const Login = () => {
             });
     }
 
+    const styleDiv = {
+        color: "orange",
+        backgroundColor: "lightYellow"
+    }
+
+    const styleButton = {
+        margin: "20px 0px 20px 0px",
+        padding: "0.5rem",
+        backgroundColor: "greenYellow",
+        borderRadius: "10px"
+    }
     return (
-        <div>
-            <h1>This is Login</h1>
-            <button onClick={handleGoogleSignIn}>Google Sign in</button>
+        <div class="container" style={styleDiv}>
+            <div class="row">
+                <div class="col-sm">
+                    <h1>Please Login To Continue</h1>
+                    <button style={styleButton} onClick={handleGoogleSignIn}>
+                        Continue with Google
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

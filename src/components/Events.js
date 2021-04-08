@@ -5,7 +5,7 @@ import noImg from '../images/icons/No Image.jpg'
 import { useHistory } from 'react-router-dom';
 
 const Event = ({ event }) => {
-    const [list,setList] = useState([]);
+    const [list, setList] = useState([]);
     const history = useHistory()
     const deleteEvent = id => {
 
@@ -13,8 +13,6 @@ const Event = ({ event }) => {
 
     const handleCheckOut = (id) => {
         history.push(`/checkout/${id}`);
-        // let newItem = {name:event.name, price:event.price}
-        // setList([...list,newItem])
     }
     // console.log(list)
     return (
@@ -28,8 +26,9 @@ const Event = ({ event }) => {
                 </Card.Body>
                 <Card.Body>
                     <h4 style={{ float: "left" }}>${event.price}</h4>
-                    {/* <Button onClick={handleCheckOut} style={{ float: "right" }}>Buy Now</Button> */}
-                    <Button onClick={() => handleCheckOut(event._id)} style={{ float: "right" }}><Link style={{ color: 'white' }} to="/checkout">Buy Now</Link></Button>
+                    <Button onClick={() => handleCheckOut(event._id)} style={{ float: "right" }}>
+                        <Link style={{ color: 'white' }} to="/checkout">Buy Now</Link>
+                    </Button>
                 </Card.Body>
             </Card>
         </div>
