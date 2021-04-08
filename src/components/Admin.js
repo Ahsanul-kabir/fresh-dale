@@ -1,10 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Manage from './Manage';
 
 const Admin = () => {
     const { register, handleSubmit, watch, errors } = useForm();
     const [imageURL, setImageURL] = useState(null);
+    const [display, setProduct] = useState(false);
+    const [manage, setManage] = useState(false);
 
     const onSubmit = data => {
         const eventData = {
@@ -22,7 +25,7 @@ const Admin = () => {
             },
             body: JSON.stringify(eventData)
         })
-        .then(res => console.log('server side response', res))
+            .then(res => console.log('server side response', res))
 
     };
 
@@ -42,19 +45,43 @@ const Admin = () => {
             });
 
     }
+
+    const [products, setEvents] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/events')
+            .then(res => res.json())
+            .then(data => setEvents(data))
+    }, [])
     return (
-        <div>
-            <h1>Add your awesome Event here</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <p>Name: <input name="name" defaultValue="New exciting event" {...register("example")} /></p>
-                <br></br>
-                <p>Product Image: <input type="file" onChange={handleImageUpload} /></p>
-                <br></br>
-                <br></br>
-                <p>Price: <input name="price" defaultValue="New exciting event" {...register("price")} /></p>
-                <br></br>
-                <input type="submit" />
-            </form>
+        <div style={{ display: 'flex' }}>
+            <div style={{ width: '50%', marginLeft: "10%" }}>
+                <button onClick={() => setProduct(true)}>Add Product</button>
+                {
+                    display ? <form onSubmit={handleSubmit(onSubmit)}>
+                        <p>Name: <input name="name" defaultValue="Product name" {...register("example")} /></p>
+                        <br></br>
+                        <p>Product Image: <input type="file" onChange={handleImageUpload} /></p>
+                        <br></br>
+                        <br></br>
+                        <p>Price: <input name="price" defaultValue="null" {...register("price")} /></p>
+                        <br></br>
+                        <button type="submit">Save</button>
+                        <br/>
+                        <br/>
+                        <button onClick={() => setProduct(false)}>Close</button>
+                    </form> : null
+                }
+            </div>
+
+
+            <div style={{ width: '50%' }}>
+                <button onClick={() => setManage(true)}>Manage</button>
+
+                {
+                    manage?products.map(product => <Manage key={product._id} product={product}></Manage>): null
+                }
+                <button onClick={() => setManage(false)}>Close</button>
+            </div>
         </div>
     );
 };
