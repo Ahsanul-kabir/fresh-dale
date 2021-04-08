@@ -9,7 +9,7 @@ const Home = () => {
     // https://rocky-badlands-49301.herokuapp.com
     useEffect(() => {
         setLoading(true)
-        fetch('http://localhost:5000/events')
+        fetch('https://rocky-badlands-49301.herokuapp.com/events')
             .then(res => res.json())
             .then(data => setEvents(data))
         setLoading(false)
@@ -20,6 +20,7 @@ const Home = () => {
     }
 
     return (
+        events[0]?
         <div style={{marginLeft:"2%"}}>
             <div className="row">
                 <form class="form-inline" style={{margin:"10px auto"}}>
@@ -33,6 +34,8 @@ const Home = () => {
                 }
             </div>
         </div>
+        :
+        <h1 class="text-success">Loading...</h1>
 
     );
 };

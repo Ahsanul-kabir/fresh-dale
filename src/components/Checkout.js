@@ -15,7 +15,7 @@ const Checkout = () => {
     const [events, setEvents] = useState([]);
     useEffect(() => {
 
-        fetch('http://localhost:5000/events')
+        fetch('https://rocky-badlands-49301.herokuapp.com/events')
             .then(res => res.json())
             .then(data => setEvents(data))
     }, [])
@@ -50,14 +50,15 @@ const Checkout = () => {
 
     const handleCheckout = () => {
         const newOrders = { ...loggedInUser, ...selectedDate };
-        fetch('http://localhost:5000/addOrders', {
+        fetch('https://rocky-badlands-49301.herokuapp.com/addOrders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newOrders)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
+                alert("Successfully Place Order")
             });
     }
     return (

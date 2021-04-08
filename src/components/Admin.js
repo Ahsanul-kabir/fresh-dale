@@ -15,8 +15,9 @@ const Admin = () => {
             imageURL: imageURL,
             price: data.price,
         };
-        const url = `http://localhost:5000/addEvents`;
+        const url = `https://rocky-badlands-49301.herokuapp.com/addEvents`;
         console.log(eventData)
+        alert('Successfully Save')
 
         fetch(url, {
             method: 'POST',
@@ -48,39 +49,41 @@ const Admin = () => {
 
     const [products, setEvents] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/events')
+        fetch('https://rocky-badlands-49301.herokuapp.com/events')
             .then(res => res.json())
             .then(data => setEvents(data))
     }, [])
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '50%', marginLeft: "10%" }}>
-                <button onClick={() => setProduct(true)}>Add Product</button>
+            <h6 className="bg-warning p-2">Add Product then Refresh this page kindly...</h6>
+                <button class="btn btn-info" onClick={() => setProduct(true)}>Add Product</button>
                 {
                     display ? <form onSubmit={handleSubmit(onSubmit)}>
-                        <p>Name: <input name="name" defaultValue="Product name" {...register("example")} /></p>
+                        <p>Name: <input class="form-control"  name="name" defaultValue="Product name" {...register("example")} /></p>
                         <br></br>
-                        <p>Product Image: <input type="file" onChange={handleImageUpload} /></p>
+                        <p>Product Image: <input class="form-control"  type="file" onChange={handleImageUpload} /></p>
                         <br></br>
                         <br></br>
-                        <p>Price: <input name="price" defaultValue="null" {...register("price")} /></p>
+                        <p>Price: <input class="form-control"  name="price" defaultValue="null" {...register("price")} /></p>
                         <br></br>
-                        <button type="submit">Save</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                         <br/>
                         <br/>
-                        <button onClick={() => setProduct(false)}>Close</button>
+                        <button class="btn btn-secondary" onClick={() => setProduct(false)}>Close</button>
                     </form> : null
                 }
             </div>
 
 
-            <div style={{ width: '50%' }}>
-                <button onClick={() => setManage(true)}>Manage</button>
+            <div style={{ width: '50%',margin:'0 10%' }}>
+            <h6 className="bg-warning p-2">After delete then Refresh this page kindly...</h6>
+                <button class="btn btn-info" onClick={() => setManage(true)}>Manage</button>
 
                 {
                     manage?products.map(product => <Manage key={product._id} product={product}></Manage>): null
                 }
-                <button onClick={() => setManage(false)}>Close</button>
+                <button class="btn btn-secondary" onClick={() => setManage(false)}>Close</button>
             </div>
         </div>
     );
